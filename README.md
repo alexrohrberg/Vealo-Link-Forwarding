@@ -5,7 +5,7 @@ This is a creation of mine that extends the basic express backend and react fron
 
 ## Running Vealo
 
-First, you will need to add your MongoDB server link url in 'server.js'. 
+#####First, you will need to add your MongoDB server link url in 'server.js'. 
 
 
 Then, you can launch the React app by cd'ing to the src folder and running the command:
