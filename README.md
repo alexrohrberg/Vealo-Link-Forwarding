@@ -7,16 +7,19 @@ This is a creation of mine that extends the basic express backend and react fron
 
 First, you will need to add your MongoDB server link url in 'server.js'. 
 
+
 Then, you can launch the React app by cd'ing to the src folder and running the command:
 ```shell
 npm start
 ```
 (this will run 'App.js' on port 3000 by default)
 
+
 Next, start the backend by cd'ing to the backend folder and running the command:
 ```shell
 npm run start
 ```
 (this starts Nodemon for the file server.js)
+
 
 Happy Coding!
