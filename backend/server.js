@@ -2,49 +2,51 @@ const mongoose = require("mongoose");
 const express = require("express");
 const cors = require("cors");
 const passport = require("passport");
-const passportLocal = require("passport-local").Strategy;
+//removed passport local
 const cookieParser = require("cookie-parser");
 const bcrypt = require("bcryptjs");
 const session = require("express-session");
 const bodyParser = require("body-parser");
 const app = express();
 const User = require("./user");
-//----------------------------------------- END OF IMPORTS---------------------------------------------------
-mongoose.connect(
-  "mongodb+srv://{Place Your Username Here!}:{Place Your Password Here!}@cluster0-q9g9s.mongodb.net/test?retryWrites=true&w=majority",
-  {
+const { Router } = require("express");
+
+//----------------------END OF IMPORTS------------------------------------------------
+
+mongoose.connect("Add MongoDB Link Here",
+{
     useNewUrlParser: true,
-    useUnifiedTopology: true,
-  },
-  () => {
-    console.log("Mongoose Is Connected");
-  }
+    useUnifiedTopology: true
+},
+    () => {
+        console.log("Mongoose Is Connected!");
+    }
 );
 
-// Middleware
+//Middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(
   cors({
-    origin: "http://localhost:3000", // <-- location of the react app were connecting to
+    origin: "http://localhost:3000", 
     credentials: true,
   })
 );
 app.use(
   session({
-    secret: "secretcode",
+    secret: "buildingbigger",
     resave: true,
     saveUninitialized: true,
   })
 );
-app.use(cookieParser("secretcode"));
+app.use(cookieParser("buildingbigger"));
 app.use(passport.initialize());
 app.use(passport.session());
-require("./passportConfig")(passport);
+require('./passportConfig')(passport);
 
-//----------------------------------------- END OF MIDDLEWARE---------------------------------------------------
+//----------------------END OF MIDDLEWARE------------------------------------------------
 
-// Routes
+//Routes
 app.post("/login", (req, res, next) => {
   passport.authenticate("local", (err, user, info) => {
     if (err) throw err;
@@ -58,27 +60,43 @@ app.post("/login", (req, res, next) => {
     }
   })(req, res, next);
 });
+
 app.post("/register", (req, res) => {
   User.findOne({ username: req.body.username }, async (err, doc) => {
     if (err) throw err;
     if (doc) res.send("User Already Exists");
     if (!doc) {
       const hashedPassword = await bcrypt.hash(req.body.password, 10);
-
       const newUser = new User({
         username: req.body.username,
         password: hashedPassword,
       });
-      await newUser.save();
+      newUser.save();
       res.send("User Created");
     }
   });
 });
+
 app.get("/user", (req, res) => {
-  res.send(req.user); // The req.user stores the entire user that has been authenticated inside of it.
+  res.send(req.user);
 });
-//----------------------------------------- END OF ROUTES---------------------------------------------------
+
+app.get("/logout", function(req, res){
+  req.logout();
+  res.send("Logged out");
+});
+
+function loggedIn(req, res, next) {
+  if (req.user) {
+      next();
+  } else {
+      res.redirect('/register');
+  }
+}
+
+//----------------------END OF ROUTES------------------------------------------------
+
 //Start Server
 app.listen(4000, () => {
-  console.log("Server Has Started");
+    console.log('Server Has Started');
 });
