@@ -17,7 +17,9 @@ Next, start the backend by cd'ing to the backend folder and running the command:
 npm run start
 ```
 
-![alt text](https://github.com/alexrohrberg/Vealo-Link-Forwarding/blob/master/VealoHome.png "Vealo Home")
-![alt text](https://github.com/alexrohrberg/Vealo-Link-Forwarding/blob/master/VealoCreate.png "Vealo Create Account")
 
-Happy Coding!
+## Screen Shots
+![alt text](https://github.com/alexrohrberg/Vealo-Link-Forwarding/blob/master/VealoHome.png "Vealo Home")
+------
+![alt text](https://github.com/alexrohrberg/Vealo-Link-Forwarding/blob/master/VealoCreate.png "Vealo Create Account")
+------
