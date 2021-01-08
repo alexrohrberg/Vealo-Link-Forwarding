@@ -1,5 +1,5 @@
 
-# Welcome to Vealo
+# Welcome to Vealo ![alt text]("https://github.com/alexrohrberg/Vealo-Link-Forwarding/blob/master/src/images/logo1x.png")
 
 This is a creation of mine that extends the basic express backend and react frontend as proposed by @woodburydev. I created the user login and registration flows and designed the beginnings of a frontend for the web application. The end goal of this would be to launch it as a social media for creators that has the link forwarding capacity of Linktree.
 
